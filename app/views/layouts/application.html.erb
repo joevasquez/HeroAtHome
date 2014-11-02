@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kandan</title>
+  <%= stylesheet_link_tag  "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" %>
+  <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:400,700" %>
+  <%= stylesheet_link_tag  "application", :media => "all" %>
+  <%= favicon_link_tag %>
+  <%= javascript_include_tag "application" %>
+  <%= airbrake_javascript_notifier %>
+  <%= yield :javascript_includes %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="kandan">
+    <div class="header">
+      <a href="/">
+        <%= image_tag "logo.png", :class=>"logo" %>  
+      </a>
+      <% if user_signed_in? %>
+        <a href="#" class="user_menu_link">
+          <cite class="user_flag"></cite>
+          <div class="user">
+            <img src="http://gravatar.com/avatar/<%= current_user.gravatar_hash %>?s=25"/>
+            <span><%= current_user.full_name_or_username %></span>
+          </div>
+        </a>
+        <%= yield :header_content %>
+      </div>
+      <div class="user_menu">
+        <%= link_to 'Admin console', admin_root_path if current_user.is_admin? %>
+        <%= link_to 'Edit Account', users_edit_path, @users_edit %><br />
+        <%= link_to 'Logout', destroy_user_session_path, :method => :delete %><br />
+        <hr>
+        <%= link_to 'About Kandan', about_path, @about %>
+      </div>
+    <% else %>
+      </div>
+      <% end %>
+    <div id="app_body">
+
+    <%= yield %>
+
+    </div>
+  </div>
+</body>
+</html>

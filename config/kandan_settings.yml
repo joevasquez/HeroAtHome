@@ -1,0 +1,15 @@
+########################
+# Kandan settings file
+########################
+
+
+# What should be used for broadcasting messages to browser?
+# valid options: Faye
+:broadcaster:
+  :name: "Faye"
+
+:per_page: 30
+
+:max_rooms: 99
+
+:public_site: true
